@@ -23,7 +23,11 @@ js：if url xxx，前面加上xxx
   <title>67373.net - 陈一发儿导航</title>
   
   <script type="text/javascript">
+  
+
     window.onload = function(){
+      var bodyNode = document.querySelector('body')
+      bodyNode.style.fontSize = parseFloat(window.getComputedStyle(bodyNode).width)/22 + 'px';
       if(0){
         setTimeout(()=>{
           location.reload();
@@ -35,7 +39,7 @@ js：if url xxx，前面加上xxx
     max-width: 518px;
     margin: auto;
     padding: 18px;
-    font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif; /* 移动端使用 */
   }
   footer {
     font-size: small;
@@ -82,10 +86,12 @@ js：if url xxx，前面加上xxx
     border-color: #ff5400;
   }
   .details-2 summary .sanJiao { /* 自定义的三角 */
-      transition: transform .2s;
+      transition: transform 0.2s, font-size 3s;
   }
   .details-2:not([open]) summary .sanJiao {
       transform: rotate(-90deg);
+      font-size: xx-large;
+      content: "test";
   }
   details > summary:first-of-type {
     list-style-type: none;
@@ -144,6 +150,7 @@ js：if url xxx，前面加上xxx
 </style>
 </head>
 <body>
+  一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十
   <div class="bigTitle"><a class="boldFont" style="margin-right: 1.8vmin;" href="https://67373.net">67373.net</a>陈一发儿导航</div>
   <hr />
   <img class="fullWidth banner" src="https://7769-wildcinema-6ggi717ue20fb424-1306579026.tcb.qcloud.la/otherRes/67373.net/67373.net%20banner5.png?sign=a9e5d552a4324c4595dc9cc216608f3e&t=1648986084" alt="banner" title="banner">
