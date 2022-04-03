@@ -40,8 +40,9 @@ js：if url xxx，前面加上xxx
   footer {
     font-size: small;
     width: fit-content;
-    text-align: center;
+    /* text-align: center; */
     margin: 20px auto;
+    max-width: 50%;
   }
   .ghostWhite{
     color: rgba(88, 88, 88, 0.08);
@@ -88,6 +89,9 @@ js：if url xxx，前面加上xxx
   }
   details > summary:first-of-type {
     list-style-type: none;
+  }
+  details summary::-webkit-details-marker {
+    display:none;
   }
   summary {
     outline: none;
