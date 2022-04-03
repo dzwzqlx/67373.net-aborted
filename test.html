@@ -30,10 +30,46 @@ js：if url xxx，前面加上xxx
           location.reload();
         }, 3000)}
       }
+      function woHaoLe(thisNode){
+        thisNode.style.backgroundColor = 'lightgray';
+        var tempText = thisNode.innerHTML;
+        thisNode.innerHTML='我好了';
+        setTimeout(() => {
+          thisNode.innerHTML = tempText;
+          thisNode.style.backgroundColor = 'white';
+          thisNode.onmouseover = function () {
+            this.style.backgroundColor = "lightgray";
+          }
+          thisNode.onmouseout = function () {
+            this.style.backgroundColor = "white";
+        };
+        }, 1000);
+      }
+      function changeOpacy(thisNode){
+        thisNode = thisNode.parentNode
+        console.log(thisNode.open)
+        if(thisNode.open){
+          thisNode.querySelector('.popDown').style.transitionProperty = 'height';
+          thisNode.querySelector('.popDown').style.opacity = 0;
+        }else{
+          thisNode.querySelector('.popDown').style.visibility = 'hidden';
+          // 下面这条无效，以后再研究吧
+          thisNode.querySelector('.popDown').style.transitionProperty = 'opacity';
+          setTimeout(()=>{
+            // 下面这条无效，以后再研究吧
+            thisNode.querySelector('.popDown').style.transitionDuration = '0.25s';
+            thisNode.querySelector('.popDown').style.visibility = 'visible';
+            thisNode.querySelector('.popDown').style.opacity = 1;
+            // console.log(thisNode.querySelector('.popDown').style.transitionDuration)
+            // console.log(window.getComputedStyle(thisNode).transitionProperty)
+            // console.log(window.getComputedStyle(thisNode).transitionDuration)
+          },100)
+        }
+      }
   </script>
 <style type="text/css">
   html{
-    max-width: 418px;
+    max-width: 518px;
     margin: auto;
     padding: 1.2rem;
     font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif; /* 移动端使用 */
@@ -50,9 +86,6 @@ js：if url xxx，前面加上xxx
   .xxSmall{
     font-size: xx-small;
   }
-  .banner{
-    /* border-radius: 1vmin; */
-  }
   .bigTitle{
     font-size: x-large;
   }
@@ -61,10 +94,15 @@ js：if url xxx，前面加上xxx
   }
   a{
     text-decoration: none;
-    color: #2a4980;
+    color: #0853d4;
+    transition-property: background-color;
+    transition-duration: 0.2s;
   }
   a:visited{
     color: default;
+  }
+  a:hover{
+    background-color: lightgray;
   }
   hr{
     margin: 1rem 0;
@@ -94,6 +132,17 @@ js：if url xxx，前面加上xxx
   details summary::-webkit-details-marker {
     display:none;
   }
+  /* detail{
+    transition-property: height;
+    transition-duration: 2s;
+  } */
+
+  details summary ~ *{
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.25s;
+  }
+
   summary {
     outline: none;
   }
@@ -139,17 +188,14 @@ js：if url xxx，前面加上xxx
   .flex{
     display: flex;
   }
-  a:hover{
-    background-color: lightgray;
-  }
 </style>
 </head>
 <body>
-  <div class="bigTitle"><a class="boldFont" style="margin-right: 1.8vmin;" href="https://67373.net">67373.net</a>陈一发儿导航</div>
+  <div class="bigTitle"><a class="boldFont" style="margin-right: 1.8vmin;" href="https://67373.net" target="_blank">67373.net</a>陈一发儿导航</div>
   <hr />
-  <img class="fullWidth banner" src="https://7769-wildcinema-6ggi717ue20fb424-1306579026.tcb.qcloud.la/otherRes/67373.net/67373.net%20banner5.png?sign=a9e5d552a4324c4595dc9cc216608f3e&t=1648986084" alt="banner" title="banner">
+  <img class="fullWidth banner" src="https://7769-wildcinema-6ggi717ue20fb424-1306579026.tcb.qcloud.la/otherRes/67373.net/67373.net%20banner5-2.png?sign=83f43ecf1110bcb51d611d7a93a05afa&t=1649016775" alt="banner" title="banner">
 
-  <details class="details-2 bigBlock"><summary><table class="fullWidth"><tr>
+  <details class="details-2 bigBlock"><summary onclick="changeOpacy(this)"><table class="fullWidth"><tr>
     <td class="td-1">
       <img class="logos" src="https://7769-wildcinema-6ggi717ue20fb424-1306579026.tcb.qcloud.la/otherRes/67373.net/YouTube%20Logo.png?sign=ab8c1bf4c3229d71c97b15ba6477bdf3&t=1649000525" alt="YouTube 图标" tile="YouTube 图标">
     </td>
@@ -161,10 +207,12 @@ js：if url xxx，前面加上xxx
     <td class="td-3 smallText">查看<div class="sanJiao">🔽</div></td>
     </tr></table></summary>
     <div class="popDown">
-      <div>地址：</div>
-      <a class="smallText" href="https://m.youtube.com/channel/UC7QVieoTCNwwW84G0bddXpA" target="_blank">https://www.youtube.com/陈一发儿67373</a>
+      <div style="width: fit-content; margin: auto;">
+        <div>频道地址：</div>
+        <a class="smallText" href="https://m.youtube.com/channel/UC7QVieoTCNwwW84G0bddXpA" target="_blank">https://www.youtube.com/陈一发儿67373</a>
+      </div>
       <div class="flex" style="padding: 0 2rem;">
-        <a class="bigButton" href="javascript:navigator.clipboard.writeText('https://m.youtube.com/channel/UC7QVieoTCNwwW84G0bddXpA')">复制</a>
+        <a class="bigButton" href="javascript:navigator.clipboard.writeText('https://m.youtube.com/channel/UC7QVieoTCNwwW84G0bddXpA')" onclick="woHaoLe(this)">复制</a>
         <a class="bigButton" href="https://m.youtube.com/channel/UC7QVieoTCNwwW84G0bddXpA" target="_blank">打开</a>
       </div>
     </div>
@@ -185,7 +233,7 @@ js：if url xxx，前面加上xxx
   </details>
   
 
-
+<details><summary>aaa</summary>bbbb</details>
 
 
 
