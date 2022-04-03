@@ -22,6 +22,7 @@ js：if url xxx，前面加上xxx
 <head>
   <title>67373.net - 陈一发儿导航</title>
   <script type="text/javascript">
+    var addOpacityInterval
     window.onload = function(){
       var bodyNode = document.querySelector('html')
       bodyNode.style.fontSize = parseFloat(window.getComputedStyle(bodyNode).width)/24 + 'px';
@@ -46,24 +47,22 @@ js：if url xxx，前面加上xxx
         }, 1000);
       }
       function changeOpacy(thisNode){
-        thisNode = thisNode.parentNode
-        console.log(thisNode.open)
+        thisNode = thisNode.parentNode;
+        thisNode.querySelector('.popDown').style.opacity = 0
         if(thisNode.open){
-          thisNode.querySelector('.popDown').style.transitionProperty = 'height';
-          thisNode.querySelector('.popDown').style.opacity = 0;
+          if(addOpacityInterval){
+            clearInterval(addOpacityInterval)
+          }
+          return
         }else{
-          thisNode.querySelector('.popDown').style.visibility = 'hidden';
-          // 下面这条无效，以后再研究吧
-          thisNode.querySelector('.popDown').style.transitionProperty = 'opacity';
-          setTimeout(()=>{
-            // 下面这条无效，以后再研究吧
-            thisNode.querySelector('.popDown').style.transitionDuration = '0.25s';
-            thisNode.querySelector('.popDown').style.visibility = 'visible';
-            thisNode.querySelector('.popDown').style.opacity = 1;
-            // console.log(thisNode.querySelector('.popDown').style.transitionDuration)
-            // console.log(window.getComputedStyle(thisNode).transitionProperty)
-            // console.log(window.getComputedStyle(thisNode).transitionDuration)
-          },100)
+          var nowOpacity = 0
+          addOpacityInterval = setInterval(()=>{
+            nowOpacity += 0.05;
+            thisNode.querySelector('.popDown').style.opacity = nowOpacity
+            if(nowOpacity>=1){
+              clearInterval(addOpacityInterval);
+            }
+          }, 15)
         }
       }
   </script>
@@ -113,7 +112,7 @@ js：if url xxx，前面加上xxx
   .bigBlock{
     border-radius: 0.5rem;
     margin: 0.7rem 0 0 0;
-    padding: 0.8rem;
+    padding: 0.6rem 0.8rem;
     border: #d8d8d8 0.01rem solid;
   }
   /* .bigBlock:hover{
@@ -136,12 +135,11 @@ js：if url xxx，前面加上xxx
     transition-property: height;
     transition-duration: 2s;
   } */
-
-  details summary ~ *{
+  /* details summary ~ *{
     opacity: 0;
     transition-property: opacity;
     transition-duration: 0.25s;
-  }
+  } */
 
   summary {
     outline: none;
@@ -193,7 +191,7 @@ js：if url xxx，前面加上xxx
 <body>
   <div class="bigTitle"><a class="boldFont" style="margin-right: 1.8vmin;" href="https://67373.net" target="_blank">67373.net</a>陈一发儿导航</div>
   <hr />
-  <img class="fullWidth banner" src="https://7769-wildcinema-6ggi717ue20fb424-1306579026.tcb.qcloud.la/otherRes/67373.net/67373.net%20banner5-2.png?sign=83f43ecf1110bcb51d611d7a93a05afa&t=1649016775" alt="banner" title="banner">
+  <img class="fullWidth" style="border: 0.1px solid #eee;" src="https://7769-wildcinema-6ggi717ue20fb424-1306579026.tcb.qcloud.la/otherRes/67373.net/67373.net%20banner5-2.png?sign=83f43ecf1110bcb51d611d7a93a05afa&t=1649016775" alt="banner" title="banner">
 
   <details class="details-2 bigBlock"><summary onclick="changeOpacy(this)"><table class="fullWidth"><tr>
     <td class="td-1">
